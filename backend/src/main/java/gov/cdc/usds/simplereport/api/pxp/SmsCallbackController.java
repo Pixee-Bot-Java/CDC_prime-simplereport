@@ -47,7 +47,7 @@ public class SmsCallbackController {
       throw e;
     }
 
-    if (body.getErrorCode().equals("30006")) {
+    if ("30006".equals(body.getErrorCode())) {
       statusService.handleLandlineError(body.getMessageSid(), body.getNumber());
     }
   }
