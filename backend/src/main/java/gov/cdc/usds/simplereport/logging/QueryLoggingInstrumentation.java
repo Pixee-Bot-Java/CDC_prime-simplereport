@@ -13,6 +13,7 @@ import graphql.execution.instrumentation.parameters.InstrumentationValidationPar
 import graphql.language.Field;
 import graphql.language.OperationDefinition;
 import graphql.validation.ValidationError;
+import io.github.pixee.security.Newlines;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -73,7 +74,7 @@ public class QueryLoggingInstrumentation extends SimpleInstrumentation {
         parameters.getGraphQLContext().get(HTTP_SERVLET_REQUEST_KEY);
 
     if (httpServletResponse != null) {
-      httpServletResponse.setHeader(LoggingConstants.REQUEST_ID_HEADER, executionId);
+      httpServletResponse.setHeader(LoggingConstants.REQUEST_ID_HEADER, Newlines.stripAll(executionId));
     }
 
     if (httpServletRequest != null) {
